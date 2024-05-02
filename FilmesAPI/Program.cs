@@ -1,5 +1,16 @@
+using FilmesAPI.Data;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//CRIANDO CONEXAO COM O BANCO DE DADOS ATRAVES DO BUILDER
+var connectionString = builder.Configuration.GetConnectionString("FilmeConnection");
+
+builder.Services.AddDbContext<FilmesContext>(opts =>
+    opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+//END
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -4,6 +4,12 @@ namespace FilmesAPI.Models;
 
 public class Filmes
 {
+    //CRIANDO CHAVE PRIMARIA PARA O DB
+    //APOS ABRIR TERMINAL NUGGET
+    //- GERANDO A MIGRATION Add-Migration CriandoTabelaDeFilme
+    // SUBINDO NO DB COM Update-Database
+    [Key]
+    [Required]
     public int Id { get;  set; }
     [Required(ErrorMessage ="O titílo é obrigatorio")]
     [MaxLength(100,ErrorMessage ="O Titulo tem que ser menor que 100 carecteres")]

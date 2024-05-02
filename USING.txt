@@ -1,0 +1,4 @@
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Tools
+Pomelo.EntityFrameworkCore.MySql
+Swashbuckle.AspNetCore
