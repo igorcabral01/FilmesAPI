@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FilmesAPI.Models;
 using FilmesAPI.Data;
+using FilmesAPI.Dtos;
+using AutoMapper;
 
 namespace FilmesAPI.Controllers;
 
@@ -9,17 +11,23 @@ namespace FilmesAPI.Controllers;
 public class FilmeController : ControllerBase
 {
     private FilmesContext _context;
-    public FilmeController(FilmesContext context)
+    private IMapper _mapper;
+ 
+
+    public FilmeController(FilmesContext context, IMapper mapper
+        )
     {
         _context = context;
+        _mapper = mapper;
     }
 
 
     // FUNÇAO CRIADA PARA ADICIONAR FILME COM METODO POST, A PARTIR DO FROMBODY E DA LISTA PRIVADA DE FILMES E DO ID CRIADO
     [HttpPost]
-    public IActionResult Adicionarfilme([FromBody] Filmes filme)
+    public IActionResult Adicionarfilme([FromBody] CreateFilmeDto filmeDto)
     {
-          _context.Add(filme);
+        Filmes filme = _mapper.Map<Filmes>(filmeDto);
+        _context.Add(filme);
           _context.SaveChanges();
           return CreatedAtAction(nameof(BuscarFilme), new {id = filme.Id },filme);
     }
